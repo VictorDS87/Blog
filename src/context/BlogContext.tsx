@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { api } from "../lib/axios";
+import { api, apiBlog } from "../lib/axios";
 
 interface Profile {
     avatar: string
@@ -11,9 +11,18 @@ interface Profile {
     login: string
 }
 
+interface Blog {
+    title: string
+    body: string
+    updated_at: Date 
+    id: string
+}
+
 interface BlogContextType {
     profiles: Profile | undefined
+    blogs: Blog[] 
     fetchProfile: () => Promise<void>;
+    fetchBlog: (query?: string) => Promise<void>;
 }
 
 interface BlogProviderProps {
@@ -24,6 +33,8 @@ export const BlogContext = createContext({} as BlogContextType)
 
 export function BlogProvider({ children }: BlogProviderProps) {
     const [ profiles, setProfiles ] = useState<Profile>()
+
+    const [ blogs, setBlogs ] = useState([])
 
     async function fetchProfile() {
         const response = await api.get('diego3g')
@@ -38,16 +49,27 @@ export function BlogProvider({ children }: BlogProviderProps) {
             login: response.data.login
         })
         
-        console.log(profiles)
+       
 
+    }
+
+    async function fetchBlog(query?: string) {
+        const response = await apiBlog.get('reactjs-github-blog-challenge', {
+            params: {
+                q: query,
+            }
+        })
+  
+        setBlogs( response.data.items)
     }
 
     useEffect(() => {
         fetchProfile()
+        fetchBlog()
     }, [])
 
     return (
-        <BlogContext.Provider value={{profiles ,fetchProfile}}>
+        <BlogContext.Provider value={{blogs, profiles ,fetchProfile, fetchBlog}}>
             {children}
         </BlogContext.Provider>
     )
