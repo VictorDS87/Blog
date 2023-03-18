@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { BlogContext } from "../../context/BlogTransactions";
+import { BlogContext } from "../../context/BlogContext";
 import { CardProfile, LinkProfile, Name, ProfileContainer, ProfileInfo, ProfileInfoLowerPart } from "./styles";
 
 // <Buildings size={32} /> <GithubLogo size={32} /> <Users size={32} />
@@ -10,7 +10,7 @@ import toForwardImage from '../../assets/toForward.svg'
 
 export function Profile() {
 
-    const { fetchProfile, profiles } = useContext(BlogContext)
+    const { profiles } = useContext(BlogContext)
     return (
         <ProfileContainer>
             
@@ -23,8 +23,12 @@ export function Profile() {
                     <Name>{profiles?.nameProfile}</Name>
                     <LinkProfile>
                         
-                    GITHUB
-                    <img src={toForwardImage} alt="" /></LinkProfile>
+                        GITHUB
+                        <a href={profiles?.url} target="_blank">
+                            <img src={toForwardImage} alt="" />
+                            
+                        </a>
+                    </LinkProfile>
                 </ProfileInfo>
                 <ProfileInfo>
                     <p>{profiles?.bio}</p>

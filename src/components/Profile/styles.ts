@@ -29,12 +29,12 @@ export const CardProfile = styled.div`
 
 export const ProfileInfo = styled.div`
     display: flex;
-
     justify-content: space-between;
 
+    align-items: center;
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
-
+    color: ${props => props.theme.text};
 `
 export const ProfileInfoLowerPart = styled.div`
     display: flex;
@@ -42,7 +42,11 @@ export const ProfileInfoLowerPart = styled.div`
 
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
-    
+    color: ${props => props.theme.subtitle};
+
+    svg {
+        color: ${props => props.theme.label};
+    }
     p {
         display: flex;
         align-items: center;
@@ -55,6 +59,7 @@ export const ProfileInfoLowerPart = styled.div`
 `
 
 export const Name = styled.p`
+    color: ${porps => porps.theme.title};
     font-size: 1.5rem;
     /* margin-top: 0.8rem; */
 
@@ -68,7 +73,7 @@ export const LinkProfile = styled.div`
     font-weight: 400;
     
     display: flex;
-    margin-top: 1rem;
+    margin-top: 2.1rem;
     font-size: 0.7rem;
 
     color:#3294F8;
