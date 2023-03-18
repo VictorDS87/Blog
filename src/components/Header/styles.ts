@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const HomeContainer = styled.main`
-    background:#1C2F41;
+    background:#0B1B2B;
     padding: 2.5rem 0 7.5rem;
 `
 
