@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
-import { api, apiBlog } from "../lib/axios";
+import { api } from "../lib/axios";
 
 let valoraAleatorio = '';
 
