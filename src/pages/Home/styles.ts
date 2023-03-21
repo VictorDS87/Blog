@@ -8,16 +8,16 @@ export const HomeContainer = styled.main`
 
 export const SummaryBlogContainer = styled.main`
     width: 100%;
-    max-width: 1173px;
-    margin: 0 auto;  
-    margin-top: 2rem;
-
+    max-width: 1150px;
+    margin: 1rem 22.2rem;  
+    
     columns: 2 auto; 
 `
 
 export const CardBlog = styled.div`
     /* display: flex; */
     
+    margin-top: 1rem;
     text-overflow: ellipsis; 
     
     width: 100%;
@@ -37,6 +37,10 @@ export const CardBlog = styled.div`
     transition: 0.3s;
     &:hover {
         filter: brightness(50%)
+    }
+
+    a {
+        text-decoration: none;
     }
     
 `
