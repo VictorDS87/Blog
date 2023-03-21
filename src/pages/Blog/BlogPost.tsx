@@ -17,26 +17,26 @@ import toForwardImage from '../../assets/toForward.svg'
 import { Calendar, ChatCircle, GithubLogo } from 'phosphor-react'
 export function BlogPost() {
       
-    interface IPostDetail {
+    interface PostProps {
         title: string;
         comments: number;
         createdAt: string;
-        githubUsername: string;
+        Username: string;
         url: string;
         body: string;
     }
 
-    const [ patinho, setPatinho ] = useState<IPostDetail>({} as IPostDetail)
+    const [ Post, setPost ] = useState<PostProps>({} as PostProps)
     
-    const { valoraAleatorio} =  useContext(BlogContext)
+    const { issues } =  useContext(BlogContext)
 
     async function fetchBlog() {
-        const response = await axios.get(`https://api.github.com/repos/rocketseat-education/reactjs-github-blog-challenge/issues/${valoraAleatorio}`)
+        const response = await axios.get(`https://api.github.com/repos/rocketseat-education/reactjs-github-blog-challenge/issues/${issues}`)
 
         const { title, comments, created_at, user, html_url, body } = response.data;
-        const newPostObj = {
+        const  newPost = {
             title,
-            githubUsername: user.login,
+            Username: user.login,
             comments,
             createdAt: formatDistanceToNow(new Date(created_at), {
                 locale: ptBR,
@@ -45,11 +45,9 @@ export function BlogPost() {
             url: html_url,
             body,
         };
-        setPatinho(newPostObj);
+        setPost(newPost);
     }
-  
-    
-    
+     
     useEffect(() => {
         fetchBlog()
     }, [])
@@ -67,20 +65,20 @@ export function BlogPost() {
                     <NavLink to="/">&lt; Voltar</NavLink>
                     <LinkPost>                      
                         VER NO GITHUB
-                        <a href={patinho.url} target="_blank">
+                        <a href={Post.url} target="_blank">
                             <img src={toForwardImage} alt="" />
                             
                         </a>
                     </LinkPost>
                 </ProfileInfo>
                 <Title>
-                    <p>{patinho.title}</p>
+                    <p>{Post.title}</p>
                 </Title>
 
                 <ProfileInfoLowerPart>
-                    <p><GithubLogo size={32} /> {patinho.githubUsername}</p>
-                    <p><Calendar size={32} /> {patinho.createdAt}</p>
-                    <p> <ChatCircle size={32} />{patinho.comments}</p>
+                    <p><GithubLogo size={32} /> {Post.Username}</p>
+                    <p><Calendar size={32} /> {Post.createdAt}</p>
+                    <p> <ChatCircle size={32} />{Post.comments}</p>
                 </ProfileInfoLowerPart>
 
                     
@@ -92,7 +90,7 @@ export function BlogPost() {
     
             </Container>
             <PostContainer>
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{patinho.body}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{Post.body}</ReactMarkdown>
             </PostContainer>
         </div>
 
