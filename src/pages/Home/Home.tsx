@@ -5,14 +5,15 @@ import { SearchForm } from "../../components/SearchForm/SearchForm";
 import { BlogContext } from "../../context/BlogContext";
 import {dateFormatter} from "../../utils/Formatter";
 
+import { NavLink } from 'react-router-dom'
+
 import { Body, CardBlog, DateBlog, HomeContainer, SummaryBlogContainer, Title } from "./styles";
 
 
 export function Home() {
-    const { blogs } =  useContext(BlogContext)
-
-    function teste() {
-        alert(blogs[0].title)
+    const { blogs, setValoraAleatorio } =  useContext(BlogContext)
+    function teste(id: string) {
+        setValoraAleatorio(id)
     }
     
     return (
@@ -26,15 +27,18 @@ export function Home() {
                 {blogs.map(blog => {
     
                         return (                                      
-                            <CardBlog onClick={teste} key={blog.id}>                          
-                                <Title>                                                                                             
-                                        {blog.title}           
-                                    <DateBlog>                                 
-                                        {dateFormatter.format(new Date(blog.updated_at))}
-                                    </DateBlog>                                   
-                                </Title>
-                                <Body>{blog.body}</Body>                               
-                            </CardBlog>                                        
+                        <CardBlog onClick={() => teste(blog.number)} key={blog.id}>                  
+                            <NavLink to="/blog" >
+                                    <Title>                                                                                             
+                                            {blog.title}           
+                                        <DateBlog>                                 
+                                            {dateFormatter.format(new Date(blog.updated_at))}
+                                        </DateBlog>                                   
+                                    </Title>
+                                    <Body>{blog.body}</Body>                               
+
+                            </NavLink>
+                        </CardBlog>                                        
                         )                  
                 })}
             </SummaryBlogContainer>
