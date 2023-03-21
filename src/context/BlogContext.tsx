@@ -1,5 +1,8 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import axios from "axios";
+import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { api, apiBlog } from "../lib/axios";
+
+let valoraAleatorio = '';
 
 interface Profile {
     avatar: string
@@ -16,11 +19,15 @@ interface Blog {
     body: string
     updated_at: Date 
     id: string
+    number: string
 }
 
 interface BlogContextType {
     profiles: Profile | undefined
     blogs: Blog[] 
+    valoraAleatorio: string
+
+    setValoraAleatorio: Dispatch<SetStateAction<string>>
     fetchProfile: () => Promise<void>;
     fetchBlog: (query?: string) => Promise<void>;
 }
@@ -33,6 +40,8 @@ export const BlogContext = createContext({} as BlogContextType)
 
 export function BlogProvider({ children }: BlogProviderProps) {
     const [ profiles, setProfiles ] = useState<Profile>()
+
+    const [ valoraAleatorio, setValoraAleatorio ] = useState('')
 
     const [ blogs, setBlogs ] = useState([])
 
@@ -53,8 +62,9 @@ export function BlogProvider({ children }: BlogProviderProps) {
 
     }
 
+    // https://api.github.com/repos/rocketseat-education/reactjs-github-blog-challenge/issues/1 
     async function fetchBlog(query?: string) {
-        const response = await apiBlog.get('reactjs-github-blog-challenge', {
+        const response = await axios.get('https://api.github.com/search/issues?q=repo:rocketseat-education/reactjs-github-blog-challenge', {
             params: {
                 q: query,
             }
@@ -69,7 +79,7 @@ export function BlogProvider({ children }: BlogProviderProps) {
     }, [])
 
     return (
-        <BlogContext.Provider value={{blogs, profiles ,fetchProfile, fetchBlog}}>
+        <BlogContext.Provider value={{blogs, valoraAleatorio, profiles, setValoraAleatorio, fetchProfile, fetchBlog}}>
             {children}
         </BlogContext.Provider>
     )
