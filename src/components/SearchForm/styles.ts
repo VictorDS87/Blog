@@ -35,5 +35,6 @@ export const LabelSpan = styled.div`
     span {
         color: ${props => props.theme.span};
         font-size: 0.85rem;
+        margin-right: 1.4rem;
     }
 `
