@@ -1,14 +1,14 @@
-import { HomeContainer, Pato } from "./styles";
+import { Container, HomeContainer } from "./styles";
 
 import headerImage from '../../assets/logoHeader.svg'
 
 export function Header() {
     return (
         <HomeContainer>
-            <Pato>
+            <Container>
                 <img src={headerImage} alt="" />
                 
-            </Pato>
+            </Container>
 
         </HomeContainer>
     )

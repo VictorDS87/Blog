@@ -11,9 +11,9 @@ import { Body, CardBlog, DateBlog, HomeContainer, SummaryBlogContainer, Title } 
 
 
 export function Home() {
-    const { blogs, setValoraAleatorio } =  useContext(BlogContext)
+    const { blogs, setIssues } =  useContext(BlogContext)
     function teste(id: string) {
-        setValoraAleatorio(id)
+        setIssues(id)
     }
     
     return (

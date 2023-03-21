@@ -5,7 +5,7 @@ export const HomeContainer = styled.main`
     padding: 2.5rem 0 7.5rem;
 `
 
-export const Pato = styled.div`
+export const Container = styled.div`
     width: 100%;
     max-width: 1120px;
     margin: 0 auto;

@@ -2,8 +2,6 @@ import axios from "axios";
 import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { api } from "../lib/axios";
 
-let valoraAleatorio = '';
-
 interface Profile {
     avatar: string
     url: string
@@ -25,9 +23,9 @@ interface Blog {
 interface BlogContextType {
     profiles: Profile | undefined
     blogs: Blog[] 
-    valoraAleatorio: string
+    issues: string
 
-    setValoraAleatorio: Dispatch<SetStateAction<string>>
+    setIssues: Dispatch<SetStateAction<string>>
     fetchProfile: () => Promise<void>;
     fetchBlog: (query?: string) => Promise<void>;
 }
@@ -41,7 +39,7 @@ export const BlogContext = createContext({} as BlogContextType)
 export function BlogProvider({ children }: BlogProviderProps) {
     const [ profiles, setProfiles ] = useState<Profile>()
 
-    const [ valoraAleatorio, setValoraAleatorio ] = useState('')
+    const [ issues, setIssues ] = useState('')
 
     const [ blogs, setBlogs ] = useState([])
 
@@ -79,7 +77,7 @@ export function BlogProvider({ children }: BlogProviderProps) {
     }, [])
 
     return (
-        <BlogContext.Provider value={{blogs, valoraAleatorio, profiles, setValoraAleatorio, fetchProfile, fetchBlog}}>
+        <BlogContext.Provider value={{blogs, issues, profiles, setIssues, fetchProfile, fetchBlog}}>
             {children}
         </BlogContext.Provider>
     )
