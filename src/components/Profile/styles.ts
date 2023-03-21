@@ -2,18 +2,19 @@ import styled, { css } from 'styled-components'
 
 export const ProfileContainer = styled.section`
     width: 100%;
-    max-width: 1120px;
+    max-width: 1150px;
     margin: 0 auto;
     padding: 0 1.5rem;
     margin-top: -5rem;
+    margin-left: 22.289rem;
+
 
     background: #0B1B2B;
     box-shadow: 0px 2px 28px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     
     display: flex;
-    justify-content: center;
-
+    
     img {
         height: 160px;
         border-radius: 6px;
@@ -44,6 +45,7 @@ export const ProfileInfoLowerPart = styled.div`
     font-weight: 400;
     color: ${props => props.theme.subtitle};
 
+    margin-top: 2.7rem;
     svg {
         color: ${props => props.theme.label};
     }
