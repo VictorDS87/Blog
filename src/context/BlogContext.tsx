@@ -62,9 +62,16 @@ export function BlogProvider({ children }: BlogProviderProps) {
 
     // https://api.github.com/repos/rocketseat-education/reactjs-github-blog-challenge/issues/1 
     async function fetchBlog(query?: string) {
-        const response = await axios.get(`https://api.github.com/search/issues?q=${query}repo:rocketseat-education/reactjs-github-blog-challenge`)
-  
-        setBlogs( response.data.items)
+        
+        if(query != undefined) {
+            const response = await axios.get(`https://api.github.com/search/issues?q=${query}repo:rocketseat-education/reactjs-github-blog-challenge`)
+            console.log(response + 'cheguei até aqui')
+            setBlogs( response.data.items)
+        }else {
+            const response = await axios.get('https://api.github.com/search/issues?q=repo:rocketseat-education/reactjs-github-blog-challenge')
+            console.log(response + 'deu ruim')
+            setBlogs( response.data.items)
+        }
     }
 
     useEffect(() => {
